@@ -1,6 +1,6 @@
 /* 테트리스 게임
  * 만든이: 김영우, 김찬휘, 정성구
- * 이메일:        , cksgnlcjswoo@naver.com, 
+ * 이메일:        , cksgnlcjswoo@naver.com, musichead99@naver.com
  * 
  * */
 
