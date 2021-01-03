@@ -7,7 +7,7 @@ GPP = g++
 OBJ_TETRIS = main.o map.o block.o
 
 $(TARGET) : $(OBJ_TETRIS)
-	$(GPP) $(OBJ_TETRIS) -o $(TARGET) -lsfml-graphics -lsfml-window -lsfml-system
+	$(GPP) $(OBJ_TETRIS) -o $(TARGET) -g -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o : main.cpp
 	$(GPP) -c main.cpp

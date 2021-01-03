@@ -3,15 +3,11 @@
 
 #ifndef __MAP_H__
 #define __MAP_H__
-#define W 20  //높이
-#define H 10  //가로길이
-
-//bool boundaryCheck() 
-//bool checkLine
-//bool downLine
+#define H 20  //높이
+#define W 10  //가로길이
 
 /* multiple defination 해결을 위해 수정 */
-extern int Map[W][H];
+extern int Map[H][W];
 
 bool boundaryCheck(); // boundaryCheck
 

@@ -39,12 +39,22 @@ bool move(int dx)
 	return true;
 }
 
-/* rotate 함수 */
+void generateBlock() {
+  srand(time(NULL)); //seed값 변경  
+  int randFigure = rand() % 7; //figure 숫자 0~6도형 중 1개 랜덤생성
+  
+  for(int i=0;i<4;i++) { //figure의 숫자를 4x2 행렬 인덱스로 대응.
+
+   cur[i].x = figure[randFigure][i] % 2;
+   cur[i].y = figure[randFigure][i] / 2;
+  
+  }
+
+return;
+}
 
 bool rotation()
 {
-	
-
 	if(!boundaryCheck()){
 		for(int i=0;i<4;i++){
 			cur[i].x = prev[i].x;
