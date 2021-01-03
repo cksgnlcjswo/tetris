@@ -16,6 +16,16 @@ int main(void) {
   clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0;
 
+/* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
+  cur[0].x = 1;
+  cur[0].y = 1;
+  cur[1].x = 1;
+  cur[1].y = 2;
+  cur[2].x = 0;
+  cur[2].y = 2;
+  cur[3].x = 0;
+  cur[3].y = 3;
+
   RenderWindow window(VideoMode(320,480), "Tetris");
   
   /*이미지 로드*/
@@ -46,7 +56,8 @@ int main(void) {
    dx = 0; // dx를 초기화해주지 않으면 한번의 키입력으로도 계속 움직임
 
    if(rotate) {
-
+	   rotation();
+	   rotate = false; // 초기화해주지 않으면 계속 회전함
    }
    
    /*tick moving함수 */
