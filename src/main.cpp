@@ -17,7 +17,7 @@
 using namespace sf;
 
 int main(void) {
-  bool rotate = false;
+  bool rotate = false, pause=false;
   clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0;
 
@@ -34,7 +34,7 @@ int main(void) {
   clock_t timer = clock();
   while(window.isOpen()) {
    Event e;
-   clock_t cur_time;
+   clock_t cur_time=0;
    while(window.pollEvent(e)) {
      if(e.type == Event::Closed) window.close(); //종료시 window 닫기
      
@@ -42,7 +42,18 @@ int main(void) {
         if(e.key.code == Keyboard::Up) rotate = true;
 	else if(e.key.code == Keyboard::Left) dx = -1;
 	else if(e.key.code == Keyboard::Right) dx = 1;
+        else if(e.key.code == Keyboard::Escape) pause=true;
      }
+   }
+
+   if(pause) {
+    while(true) {
+     if(Keyboard:: isKeyPressed(Keyboard::Escape)) {
+      pause = false;
+      break;
+      //pause하고 menu창 추가하려면 다시 만들어야함.
+     }
+    }
    }
 
    if(Keyboard::isKeyPressed(Keyboard::Down)); //delay 변화 

@@ -1,6 +1,5 @@
 /*block.h에서 정의한 함수 */
-<<<<<<< HEAD
-=======
+
 #include <iostream>
 #include "block.h"
 #include "map.h"
@@ -59,6 +58,4 @@ bool rotation()
 	}
 	return true;
 }
->>>>>>> d0e92dcfe312a89993c42b43f8c8f41b99aafdea
-
 

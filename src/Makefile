@@ -1,21 +1,23 @@
-#author : 정성구
-#처음에 gcc -c main.cpp
+#author : 정성구,김찬휘,김영우
+#처음에 g++ -c main.cpp
 #g++ main.o -o tetris -lsfml-graphics -lsfml-window -lsfml-system로 실행파일 생성
-#ieeeee
 
 TARGET = tetris
+GPP = g++
+OBJ_TETRIS = main.o map.o block.o
 
-$(TARGET) : main.o map.o block.o
-	g++ main.o map.o block.o -o $(TARGET) -lsfml-graphics -lsfml-window -lsfml-system
+$(TARGET) : $(OBJ_TETRIS)
+	$(GPP) $(OBJ_TETRIS) -o $(TARGET) -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o : main.cpp
-	g++ -c main.cpp
+	$(GPP) -c main.cpp
 
 map.o : map.cpp
-	g++ -c map.cpp 
+	$(GPP) -c map.cpp 
 
 block.o : block.cpp
-	g++ -c block.cpp
+	$(GPP) -c block.cpp
 
 clean :
-	rm *.o tetris
+	@echo "cleaning Tetris game...."
+	rm $(OBJ_TETRIS) tetris
