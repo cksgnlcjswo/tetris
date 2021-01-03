@@ -44,6 +44,7 @@ bool checkLine()
 {
 	// vector 의 pair를 사용하면 더 간단해 질지도 ... 일단 보류.
 	
+	bool rt_val = false;
 	int f_line = -1; // 지워야 하는 첫번째 줄의 index값.
 	int l_line = -1; // 지워야 하는 마지막 줄의 index값.
 	int checking; // 현재 행에서 한칸하칸의 index.
@@ -54,7 +55,7 @@ bool checkLine()
 
 		// checking == H 라면 검사했던 라인은 사라져야 하는 라인.
 
-		if(checking == H && f_line == -1) {f_line = cur; l_line = cur} 	// f_line이 -1이라면 cur가 지우기 시작줄. l_line도 같이 갱신.
+		if(checking == H && f_line == -1) {f_line = cur; l_line = cur; rt_val=true;} 	// f_line이 -1이라면 cur가 지우기 시작줄. l_line도 같이 갱신.
 		else if(checking == H) l_line = cur;				// 현재 라인이 지워야 하는 라인이고 f_line이 -1이 이니라면 l_line갱신.
 		else if(checking != H && f_line != -1)				// f_line이 -1이 아니고 checking 이 H와 값이 다르면 일단 지우기를 진행.
 		{
@@ -70,4 +71,7 @@ bool checkLine()
 		}
 			
 	}
+	return rt_val;
 }
+
+

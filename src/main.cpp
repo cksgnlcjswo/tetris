@@ -13,7 +13,7 @@ using namespace sf;
 
 int main(void) {
   bool rotate = false;
-  float delay = 0;
+  clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0;
 
   RenderWindow window(VideoMode(320,480), "Tetris");
@@ -26,8 +26,10 @@ int main(void) {
 
   Sprite s(t1), background(t2), frame(t3);
 
+  clock_t timer = clock();
   while(window.isOpen()) {
    Event e;
+   clock_t cur_time;
    while(window.pollEvent(e)) {
      if(e.type == Event::Closed) window.close(); //종료시 window 닫기
      
@@ -48,6 +50,15 @@ int main(void) {
    }
    
    /*tick moving함수 */
+   cur_time = clock();
+   if(cur_time > timer + delay)
+   {
+	   for(int i=0;i<4;i++) cur[i].y--;
+
+	   if(!boundaryCheck()) for(int i=0;i<4;i++) cur[i].y++;
+
+	   timer = clock();
+   }
    
    /*line check함수 */
    
