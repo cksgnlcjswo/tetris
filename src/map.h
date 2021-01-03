@@ -8,6 +8,6 @@
 int Map[W][H] = {0};
 
 //bool boundaryCheck() 
-//checkLine
-//downLine
+//bool checkLine
+//bool downLine
 #endif
