@@ -18,3 +18,16 @@ bool boundaryCheck()
 	}
 	return true;
 }
+
+bool checkLine()
+{
+
+	for(int cur=0;cur<W;cur++)
+	{
+		bool line_clear = false;
+		for(int checking=0;checking<H;checking++)
+		{
+			
+		}
+	}
+}

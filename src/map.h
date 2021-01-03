@@ -9,7 +9,9 @@
 /* multiple defination 해결을 위해 수정 */
 extern int Map[W][H];
 
-bool boundaryCheck(); 
-//checkLine
-//downLine
+bool boundaryCheck(); // boundaryCheck
+
+bool checkLine();//checkLine
+
+void downLine();//downLine
 #endif
