@@ -1,10 +1,16 @@
 /* 테트리스 게임
  * 만든이: 김영우, 김찬휘, 정성구
+<<<<<<< HEAD
  * 이메일:        , cksgnlcjswoo@naver.com, 
  *  
+=======
+ * 이메일:        , cksgnlcjswoo@naver.com, musichead99@naver.com
+ * 
+>>>>>>> d0e92dcfe312a89993c42b43f8c8f41b99aafdea
  * */
 
 #include <SFML/Graphics.hpp>
+#include <time.h>
 #include "map.h"
 #include "block.h"
 
@@ -12,7 +18,7 @@ using namespace sf;
 
 int main(void) {
   bool rotate = false;
-  float delay = 0;
+  clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0;
 
   RenderWindow window(VideoMode(320,480), "Tetris");
@@ -25,8 +31,10 @@ int main(void) {
 
   Sprite s(t1), background(t2), frame(t3);
 
+  clock_t timer = clock();
   while(window.isOpen()) {
    Event e;
+   clock_t cur_time;
    while(window.pollEvent(e)) {
      if(e.type == Event::Closed) window.close(); //종료시 window 닫기
      
@@ -36,17 +44,26 @@ int main(void) {
 	else if(e.key.code == Keyboard::Right) dx = 1;
      }
    }
-     
-   if(Keyboard::isKeyPressed(Keyboard::Down)) //delay 변화 
-   
-   /*Move함수 */
 
-   /*rotate함수 */
+   if(Keyboard::isKeyPressed(Keyboard::Down)); //delay 변화 
+   
+   move(dx);
+   dx = 0; // dx를 초기화해주지 않으면 한번의 키입력으로도 계속 움직임
+
    if(rotate) {
 
    }
    
    /*tick moving함수 */
+   cur_time = clock();
+   if(cur_time > timer + delay)
+   {
+	   for(int i=0;i<4;i++) cur[i].y--;
+
+	   if(!boundaryCheck()) for(int i=0;i<4;i++) cur[i].y++;
+
+	   timer = clock();
+   }
    
    /*line check함수 */
    
@@ -67,7 +84,7 @@ int main(void) {
    }
    
    for(int i=0; i < 4; i++) {   
-       s.setTextureRect(IntRect(colorNum*18,0,18,18)); //새로 만들어진 도형 그리기
+       s.setTextureRect(IntRect(0*18,0,18,18)); //새로 만들어진 도형 그리기
        s.setPosition(cur[i].x*18,cur[i].y*18);
        s.move(28,31);
        window.draw(s);

@@ -6,22 +6,19 @@
 #ifndef __BLOCK_H__
 #define __BLOCK_H__
 
-int figures[7][4] = { //모양은 7개
-  1,3,5,7,
-  2,4,5,7,
-  3,5,4,6,
-  3,5,4,7,
-  2,3,5,7,
-  3,5,7,6,
-  2,3,4,5,
+/* Point 구조체와 figures배열의 multiple defination 해결을 위해 수정 */
+
+extern int figures[7][4];
+
+struct Point{
+	int x;
+	int y;
 };
 
-struct Point {
-  int x;
-  int y;
-} cur[4], prev[4];
+extern struct Point cur[4], prev[4];
 
-//moving함수
-//rotate함수
+bool move(int dx);
+
+bool rotation();
 
 #endif
