@@ -13,7 +13,7 @@ using namespace sf;
 
 int main(void) {
   bool rotate = false;
-  clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
+  clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0;
 
   RenderWindow window(VideoMode(320,480), "Tetris");
@@ -53,9 +53,9 @@ int main(void) {
    cur_time = clock();
    if(cur_time > timer + delay)
    {
-	   for(int i=0;i<4;i++) cur[i].y--;
+	   for(int i=0;i<4;i++) cur[i].y++;
 
-	   if(!boundaryCheck()) for(int i=0;i<4;i++) cur[i].y++;
+	   if(!boundaryCheck()) for(int i=0;i<4;i++) cur[i].y--;
 
 	   timer = clock();
    }
