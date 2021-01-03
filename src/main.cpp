@@ -37,10 +37,9 @@ int main(void) {
      }
    }
      
-   if(Keyboard::isKeyPressed(Keyboard::Down)) //delay 변화 
+   if(Keyboard::isKeyPressed(Keyboard::Down)); //delay 변화 
    
    move(dx);
-
    
    if(rotate) {
 
