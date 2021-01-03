@@ -55,14 +55,29 @@ return;
 
 bool rotation()
 {
+<<<<<<< HEAD
+=======
+	Point tmp;
+
+	for(int i = 0;i < 4; i++){
+		tmp.x = cur[i].y - cur[1].y;
+		tmp.y = cur[i].x - cur[1].x;
+
+		/* 중심 블록을 기준으로 x축에 있는 블록을 회전시킬 땐 +, y축에 있는 블록을 회전시킬 땐 - */
+
+		cur[i].x = cur[1].x - tmp.x; 
+		cur[i].y = cur[1].y + tmp.y;
+	}
+
+>>>>>>> d8c7585fe787a893e6ff25e7dab8f345ecc7a68c
 	if(!boundaryCheck()){
-		for(int i=0;i<4;i++){
+		for(int i = 0;i < 4;i++){
 			cur[i].x = prev[i].x;
 			cur[i].y = prev[i].y;
 		}
 		return false;
 	}
-	for(int i=0;i<4;i++){
+	for(int i = 0;i < 4;i++){
 		prev[i].x = cur[i].x;
 		prev[i].y = cur[i].y;
 	}

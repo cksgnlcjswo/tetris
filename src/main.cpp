@@ -13,10 +13,26 @@
 using namespace sf;
 
 int main(void) {
+<<<<<<< HEAD
  	
   bool rotate = false, pause=false;
   clock_t delay = 0.3 * CLOCKS_PER_SEC; // 0.3 초
   int dx= 0, colorNum;
+=======
+  bool rotate = false;
+  clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
+  int dx= 0;
+>>>>>>> d8c7585fe787a893e6ff25e7dab8f345ecc7a68c
+
+/* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
+  cur[0].x = 1;
+  cur[0].y = 1;
+  cur[1].x = 1;
+  cur[1].y = 2;
+  cur[2].x = 0;
+  cur[2].y = 2;
+  cur[3].x = 0;
+  cur[3].y = 3;
 
   RenderWindow window(VideoMode(320,480), "Tetris");
   
@@ -61,11 +77,13 @@ int main(void) {
    dx = 0; // dx를 초기화해주지 않으면 한번의 키입력으로도 계속 움직임
 
    if(rotate) {
-
+	   rotation();
+	   rotate = false; // 초기화해주지 않으면 계속 회전함
    }
 
    /*tick moving함수 */
    cur_time = clock();
+<<<<<<< HEAD
    if(cur_time > timer + delay) {
 	   
       for(int i=0;i<4;i++) cur[i].y++;
@@ -79,6 +97,15 @@ int main(void) {
 	 generateBlock(); //cur 갱신
       }
    timer = clock();
+=======
+   if(cur_time > timer + delay)
+   {
+	   for(int i=0;i<4;i++) cur[i].y++;
+
+	   if(!boundaryCheck()) for(int i=0;i<4;i++) cur[i].y--;
+
+	   timer = clock();
+>>>>>>> d8c7585fe787a893e6ff25e7dab8f345ecc7a68c
    }
    
    /*line check함수 */
