@@ -5,6 +5,7 @@
  * */
 
 #include <SFML/Graphics.hpp>
+#include <time.h>
 #include "map.h"
 #include "block.h"
 
@@ -36,12 +37,12 @@ int main(void) {
 	else if(e.key.code == Keyboard::Right) dx = 1;
      }
    }
-     
-   if(Keyboard::isKeyPressed(Keyboard::Down)) //delay 변화 
+
+   if(Keyboard::isKeyPressed(Keyboard::Down)); //delay 변화 
    
    move(dx);
+   dx = 0; // dx를 초기화해주지 않으면 한번의 키입력으로도 계속 움직임
 
-   
    if(rotate) {
 
    }

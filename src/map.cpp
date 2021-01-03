@@ -11,7 +11,7 @@ bool boundaryCheck()
 {
 	for(int i = 0;i < 4; i++)
 	{
-		if(cur[i].x < -1 || cur[i].y < -1 || cur[i].x >= W || cur[i].y >= H )
+		if(cur[i].x < 0 || cur[i].y < 0 || cur[i].x >= H || cur[i].y >= W )
 		{
 			return false;
 		}
