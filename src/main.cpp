@@ -13,16 +13,10 @@
 using namespace sf;
 
 int main(void) {
-<<<<<<< HEAD
  	
   bool rotate = false, pause=false;
   clock_t delay = 0.3 * CLOCKS_PER_SEC; // 0.3 초
   int dx= 0, colorNum;
-=======
-  bool rotate = false;
-  clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
-  int dx= 0;
->>>>>>> d8c7585fe787a893e6ff25e7dab8f345ecc7a68c
 
 /* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
   cur[0].x = 1;
@@ -83,7 +77,7 @@ int main(void) {
 
    /*tick moving함수 */
    cur_time = clock();
-<<<<<<< HEAD
+
    if(cur_time > timer + delay) {
 	   
       for(int i=0;i<4;i++) cur[i].y++;
@@ -97,16 +91,8 @@ int main(void) {
 	 generateBlock(); //cur 갱신
       }
    timer = clock();
-=======
-   if(cur_time > timer + delay)
-   {
-	   for(int i=0;i<4;i++) cur[i].y++;
 
-	   if(!boundaryCheck()) for(int i=0;i<4;i++) cur[i].y--;
-
-	   timer = clock();
->>>>>>> d8c7585fe787a893e6ff25e7dab8f345ecc7a68c
-   }
+  }
    
    /*line check함수 */
    

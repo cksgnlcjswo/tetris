@@ -18,8 +18,6 @@ int figure[7][4] = { //모양은 7개
 
 struct Point cur[4], prev[4];
 
-/* move함수 */
-
 bool move(int dx)
 {
 	/* 우선 cur의 block의 좌표를 이동시킴 */
@@ -55,8 +53,6 @@ return;
 
 bool rotation()
 {
-<<<<<<< HEAD
-=======
 	Point tmp;
 
 	for(int i = 0;i < 4; i++){
@@ -69,7 +65,6 @@ bool rotation()
 		cur[i].y = cur[1].y + tmp.y;
 	}
 
->>>>>>> d8c7585fe787a893e6ff25e7dab8f345ecc7a68c
 	if(!boundaryCheck()){
 		for(int i = 0;i < 4;i++){
 			cur[i].x = prev[i].x;
