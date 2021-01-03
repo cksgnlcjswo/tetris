@@ -3,7 +3,7 @@
 #g++ main.o -o tetris -lsfml-graphics -lsfml-window -lsfml-system로 실행파일 생성
 #ieeeee
 
-TARGET = tetris
+TARGET = tetris.out
 
 $(TARGET) : main.o map.o block.o
 	g++ main.o map.o block.o -o $(TARGET) -lsfml-graphics -lsfml-window -lsfml-system
@@ -18,4 +18,4 @@ block.o : block.cpp
 	g++ -c block.cpp
 
 clean :
-	rm *.o tetris
+	rm *.o tetris.out
