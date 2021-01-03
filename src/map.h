@@ -13,5 +13,7 @@ bool boundaryCheck(); // boundaryCheck
 
 bool checkLine();//checkLine
 
-void downLine();//downLine
+void downLine(int f_line, int l_line);	 //downLine
+
+void clearLine(int f_line, int l_line);  //erase a line if it has to be cleared.
 #endif
