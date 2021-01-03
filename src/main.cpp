@@ -39,9 +39,9 @@ int main(void) {
      
    if(Keyboard::isKeyPressed(Keyboard::Down)) //delay 변화 
    
-   /*Move함수 */
+   move(dx);
 
-   /*rotate함수 */
+   
    if(rotate) {
 
    }
@@ -67,7 +67,7 @@ int main(void) {
    }
    
    for(int i=0; i < 4; i++) {   
-       s.setTextureRect(IntRect(colorNum*18,0,18,18)); //새로 만들어진 도형 그리기
+       s.setTextureRect(IntRect(0*18,0,18,18)); //새로 만들어진 도형 그리기
        s.setPosition(cur[i].x*18,cur[i].y*18);
        s.move(28,31);
        window.draw(s);
