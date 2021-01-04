@@ -14,9 +14,9 @@ using namespace sf;
 
 int main(void) {
  	
-  bool rotate = false, pause=false;
+  bool rotate = false;
   clock_t delay = 0.3 * CLOCKS_PER_SEC; // 0.3 초
-  int dx= 0, colorNum;
+  int dx= 0, color=1;
 
 /* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
   cur[0].x = 1;
@@ -43,6 +43,9 @@ int main(void) {
   while(window.isOpen()) {
    Event e;
    clock_t cur_time;
+
+   /*게임 시작 메뉴 */
+
    while(window.pollEvent(e)) {
      if(e.type == Event::Closed) window.close(); //종료시 window 닫기
      
@@ -50,22 +53,11 @@ int main(void) {
         if(e.key.code == Keyboard::Up) rotate = true;
 	else if(e.key.code == Keyboard::Left) dx = -1;
 	else if(e.key.code == Keyboard::Right) dx = 1;
-     //   else if(e.key.code == Keyboard::Escape) pause=true;
+       // else if(e.key.code == Keyboard::Space) pause();
      }
    }
 
-/*
-   if(pause) {
-    while(true) {
-     if(Keyboard :: isKeyPressed(Keyboard::Escape)) {
-      pause = false;
-      break;
-      //pause하고 menu창 추가하려면 다시 만들어야함.
-     }
-    }
-   }
-*/
-   if(Keyboard::isKeyPressed(Keyboard::Down)) delay=0.15; //delay 변화 
+   if(Keyboard::isKeyPressed(Keyboard::Down)) delay=0.2; //delay 변화 
    
    move(dx);
    dx = 0; // dx를 초기화해주지 않으면 한번의 키입력으로도 계속 움직임
@@ -83,15 +75,14 @@ int main(void) {
       for(int i=0;i<4;i++) cur[i].y++;
 
       if(!boundaryCheck()) { //y축으로 바운드를 나가거나 블록에 부딪힌 경우 된경우는 새로운 블록 생성및 블록 값 맵에 입력
-	      
+	 int color = rand() % 7 + 1; //값의 범위를 1~7로 줌 -> 블록이 있는 곳의 Map값은 0이 될수없어서..     
 	 for(int i=0;i<4;i++) { 
 		 cur[i].y--;
-	         Map[cur[i].y][cur[i].x] = 2; //색깔 만들면 2 대신에 색깔변수 넣어주면 됨.
+	         Map[cur[i].y][cur[i].x] = 1; //움직일수 없는 블록은 같은색으로 고정
 	 }	     
 	 generateBlock(); //cur 갱신
       }
    timer = clock();
-
   }
    
    /*line check함수 */
@@ -114,7 +105,7 @@ int main(void) {
      }
       
    for(int i=0; i < 4; i++) {   
-       s.setTextureRect(IntRect(18,0,18,18)); //새로 만들어진 도형 그리기, 색깔 변수있으면 1대신에 색깔 변수
+       s.setTextureRect(IntRect(color,0,18,18)); //새로 만들어진 도형 그리기
        s.setPosition(cur[i].x*18,cur[i].y*18);
        s.move(28,31);
        window.draw(s);
