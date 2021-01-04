@@ -19,6 +19,7 @@ int main(void) {
   int dx= 0, color=1;
 
 /* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
+  
   cur[0].x = 1;
   cur[0].y = 1;
   cur[1].x = 1;
@@ -31,6 +32,7 @@ int main(void) {
   RenderWindow window(VideoMode(320,480), "Tetris");
   
   /*이미지 로드*/
+
   Texture t1,t2,t3;
   t1.loadFromFile("../image/tiles.png");
   t2.loadFromFile("../image/background.png");
@@ -64,7 +66,7 @@ int main(void) {
 
    if(rotate) {
 	   rotation();
-	   rotate = false; // 초기화해주지 않으면 계속 회전함
+	rotate = false; // 초기화해주지 않으면 계속 회전함
    }
 
    /*tick moving함수 */
@@ -77,13 +79,13 @@ int main(void) {
       if(!boundaryCheck()) { //y축으로 바운드를 나가거나 블록에 부딪힌 경우 된경우는 새로운 블록 생성및 블록 값 맵에 입력
 	 int color = rand() % 7 + 1; //값의 범위를 1~7로 줌 -> 블록이 있는 곳의 Map값은 0이 될수없어서..     
 	 for(int i=0;i<4;i++) { 
-		 cur[i].y--;
+	 	 cur[i].y--;
 	         Map[cur[i].y][cur[i].x] = 1; //움직일수 없는 블록은 같은색으로 고정
 	 }	     
 	 generateBlock(); //cur 갱신
       }
    timer = clock();
-  }
+   }
    
    /*line check함수 */
    
