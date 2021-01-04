@@ -54,6 +54,12 @@ return;
 bool rotation()
 {
 	Point tmp;
+	
+	for(int i = 0;i < 4; i++)
+	{
+		prev[i].x = cur[i].x;
+		prev[i].y = cur[i].y;
+	}
 
 	for(int i = 0;i < 4; i++){
 		tmp.x = cur[i].y - cur[1].y;
