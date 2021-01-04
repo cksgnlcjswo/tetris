@@ -15,19 +15,10 @@ using namespace sf;
 int main(void) {
  	
   bool rotate = false;
-  clock_t delay = 0.3 * CLOCKS_PER_SEC; // 0.3 초
+  clock_t delay = 0.03 * CLOCKS_PER_SEC; // 0.3 초
   int dx= 0, color=1;
-
-/* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
   
-  cur[0].x = 1;
-  cur[0].y = 1;
-  cur[1].x = 1;
-  cur[1].y = 2;
-  cur[2].x = 0;
-  cur[2].y = 2;
-  cur[3].x = 0;
-  cur[3].y = 3;
+/* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
 
   RenderWindow window(VideoMode(320,480), "Tetris");
   
@@ -41,6 +32,8 @@ int main(void) {
   Sprite s(t1), background(t2), frame(t3);
   
   clock_t timer=clock();
+  generateBlock(cur);
+  generateBlock(next);
 
   while(window.isOpen()) {
    Event e;
@@ -55,7 +48,7 @@ int main(void) {
         if(e.key.code == Keyboard::Up) rotate = true;
 	else if(e.key.code == Keyboard::Left) dx = -1;
 	else if(e.key.code == Keyboard::Right) dx = 1;
-       // else if(e.key.code == Keyboard::Space) pause();
+      //else if(e.key.code == Keyboard::Space) pause();
      }
    }
 
@@ -65,7 +58,7 @@ int main(void) {
    dx = 0; // dx를 초기화해주지 않으면 한번의 키입력으로도 계속 움직임
 
    if(rotate) {
-	   rotation();
+	rotation();
 	rotate = false; // 초기화해주지 않으면 계속 회전함
    }
 
@@ -77,12 +70,16 @@ int main(void) {
       for(int i=0;i<4;i++) cur[i].y++;
 
       if(!boundaryCheck()) { //y축으로 바운드를 나가거나 블록에 부딪힌 경우 된경우는 새로운 블록 생성및 블록 값 맵에 입력
+	 
 	 int color = rand() % 7 + 1; //값의 범위를 1~7로 줌 -> 블록이 있는 곳의 Map값은 0이 될수없어서..     
 	 for(int i=0;i<4;i++) { 
-	 	 cur[i].y--;
-	         Map[cur[i].y][cur[i].x] = 1; //움직일수 없는 블록은 같은색으로 고정
+	      cur[i].y--;
+	      Map[cur[i].y][cur[i].x] = 1; //움직일수 없는 블록은 같은색으로 고정
+	      cur[i].x = next[i].x; 
+	      cur[i].y = next[i].y;   
 	 }	     
-	 generateBlock(); //cur 갱신
+
+	 generateBlock(next); //next 갱신
       }
    timer = clock();
    }
@@ -91,7 +88,7 @@ int main(void) {
    
    /*게임 종료 체크-> 이거는 main.cpp에 구현*/
 
-   delay = 0.3 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
+   delay = 0.03 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
    /*그리기 */	   
 
    window.clear(Color::White); 
@@ -113,9 +110,16 @@ int main(void) {
        window.draw(s);
    }
 
+   for(int i=0; i < 4; i++) {
+       s.setTextureRect(IntRect(1,0,18,18)); //다음 도형 그리기
+       s.setPosition(next[i].x*18, next[i].y*18);
+       s.move(250,31);
+       window.draw(s);
+   }
+
    window.draw(frame);
    window.display();
   }
 
-  return 0;
+return 0;
 }

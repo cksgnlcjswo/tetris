@@ -14,9 +14,9 @@ struct Point{
 	int y;
 };
 
-extern struct Point cur[4], prev[4];
+extern struct Point cur[4], prev[4], next[4];
 bool move(int dx);
-void generateBlock();
+void generateBlock(struct Point p[4]);
 bool rotation();
 
 #endif

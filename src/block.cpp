@@ -16,7 +16,7 @@ int figure[7][4] = { //모양은 7개
   2,3,4,5,
 };
 
-struct Point cur[4], prev[4];
+struct Point cur[4], prev[4], next[4];
 
 bool move(int dx)
 {
@@ -37,15 +37,14 @@ bool move(int dx)
 	return true;
 }
 
-void generateBlock() {
+void generateBlock(struct Point p[4]) {
   srand(time(NULL)); //seed값 변경  
   int randFigure = rand() % 7; //figure 숫자 0~6도형 중 1개 랜덤생성
   
   for(int i=0;i<4;i++) { //figure의 숫자를 4x2 행렬 인덱스로 대응.
 
-   cur[i].x = figure[randFigure][i] % 2;
-   cur[i].y = figure[randFigure][i] / 2;
-  
+   p[i].x = figure[randFigure][i] % 2;
+   p[i].y = figure[randFigure][i] / 2;
   }
 
 return;
