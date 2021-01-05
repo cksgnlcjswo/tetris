@@ -14,6 +14,8 @@ struct Point{
 	int y;
 };
 
+extern bool squareFlag;
+
 extern struct Point cur[4], prev[4], next[4];
 bool move(int dx);
 void generateBlock(struct Point p[4]);

@@ -15,10 +15,8 @@ using namespace sf;
 int main(void) {
  	
   bool rotate = false;
-  clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.3 초
+  clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0, color=1;
-  
-/* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
 
   RenderWindow window(VideoMode(320,480), "Tetris");
   
@@ -59,7 +57,6 @@ int main(void) {
 
    if(rotate) {
 	rotation();
-	rotate = false; // 초기화해주지 않으면 계속 회전함
    }
 
    /*tick moving함수 */
@@ -89,7 +86,7 @@ int main(void) {
 
    /*게임 종료 체크-> 이거는 main.cpp에 구현*/
 
-   delay = 0.05 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
+   delay = 0.5 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
    /*그리기 */	   
 
    window.clear(Color::White); 
