@@ -15,7 +15,7 @@ using namespace sf;
 int main(void) {
   srand(time(NULL));	
   bool rotate = false;
-  clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
+  clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0, color=1;
 
   RenderWindow window(VideoMode(320,480), "Tetris");
@@ -86,7 +86,7 @@ int main(void) {
 
    /*게임 종료 체크-> 이거는 main.cpp에 구현*/
 
-   delay = 0.5 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
+   delay = 0.05 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
    /*그리기 */	   
 
    window.clear(Color::White); 
