@@ -14,7 +14,8 @@ struct Point{
 	int y;
 };
 
-extern bool squareFlag;
+extern bool curSquareFlag;
+extern bool nextSquareFlag;
 
 extern struct Point cur[4], prev[4], next[4];
 bool move(int dx);

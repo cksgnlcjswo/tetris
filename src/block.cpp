@@ -18,7 +18,8 @@ int figure[7][4] = { //모양은 7개
 
 struct Point cur[4], prev[4], next[4];
 
-bool squareFlag = false;
+bool curSquareFlag = false;
+bool nextSquareFlag = false;
 
 bool move(int dx)
 {
@@ -48,6 +49,8 @@ void generateBlock(struct Point p[4]) {
    p[i].x = figure[randFigure][i] % 2;
    p[i].y = figure[randFigure][i] / 2;
   }
+  if(randFigure == 6) nextSquareFlag = true;
+  else nextSquareFlag = false;
 
 return;
 }
@@ -55,6 +58,8 @@ return;
 bool rotation()
 {
    Point tmp;
+   
+   if(curSquareFlag) return true;
 
    for(int i = 1;i < 5; i++) // %를 이용해서 2,3,4,1번 블록 순서로 회전축을 바꿈
    {

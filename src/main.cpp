@@ -31,6 +31,7 @@ int main(void) {
   
   clock_t timer=clock();
   generateBlock(cur);
+  curSquareFlag = nextSquareFlag;
   generateBlock(next);
 
   while(window.isOpen()) {
@@ -73,7 +74,8 @@ int main(void) {
 	      cur[i].y--;
 	      Map[cur[i].y][cur[i].x] = 1; //움직일수 없는 블록은 같은색으로 고정
 	      cur[i].x = next[i].x; 
-	      cur[i].y = next[i].y;   
+	      cur[i].y = next[i].y;
+	      curSquareFlag = nextSquareFlag;   
 	 }	     
 
 	 generateBlock(next); //next 갱신
