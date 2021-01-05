@@ -13,7 +13,7 @@
 using namespace sf;
 
 int main(void) {
- 	
+  srand(time(NULL));	
   bool rotate = false;
   clock_t delay = 0.5 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0, color=1;
