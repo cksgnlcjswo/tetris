@@ -113,7 +113,7 @@ int main(void) {
    for(int i=0; i < 4; i++) {
        s.setTextureRect(IntRect(1,0,18,18)); //다음 도형 그리기
        s.setPosition(next[i].x*18, next[i].y*18);
-       s.move(250,31);
+       s.move(255,54);
        window.draw(s);
    }
 
