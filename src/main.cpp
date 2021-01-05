@@ -1,7 +1,7 @@
 /* 테트리스 게임
  * 만든이: 김영우, 김찬휘, 정성구
  *  
- * 이메일:        , cksgnlcjswoo@naver.com, musichead99@naver.com
+ * 이메일:        , rdd0426@gmail.com, cksgnlcjswoo@naver.com, musichead99@naver.com
  * 
  * */
 
@@ -15,7 +15,7 @@ using namespace sf;
 int main(void) {
  	
   bool rotate = false;
-  clock_t delay = 0.03 * CLOCKS_PER_SEC; // 0.3 초
+  clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.3 초
   int dx= 0, color=1;
   
 /* rotation함수 작동 확인을 위해서 블록 모양 미리 정의 */
@@ -85,10 +85,11 @@ int main(void) {
    }
    
    /*line check함수 */
-   
+   checkLine();
+
    /*게임 종료 체크-> 이거는 main.cpp에 구현*/
 
-   delay = 0.03 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
+   delay = 0.05 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
    /*그리기 */	   
 
    window.clear(Color::White); 

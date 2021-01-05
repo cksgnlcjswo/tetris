@@ -23,7 +23,7 @@ void clearLine(int f_line,int l_line)
 {
 	for(int i = f_line;i<=l_line;i++)
 	{
-		for(int j=0;j<H;j++) Map[i][j] = 0;
+		for(int j=0;j<W;j++) Map[i][j] = 0;
 	}
 }
 
@@ -33,10 +33,10 @@ void downLine(int f_line,int l_line)
 
 	for(int i= l_line - line_gap ; i >=0 ; i--)
 	{
-		for(int j = 0;j < H; j++)
+		for(int j = 0;j < W; j++)
 		{
-			Map[i+line_gap][j] == Map[i][j];
-			Map[i][j] == 0;
+			Map[i+line_gap][j] = Map[i][j];
+			Map[i][j] = 0;
 		}
 	}
 }
@@ -49,16 +49,19 @@ bool checkLine()
 	int f_line = -1; // 지워야 하는 첫번째 줄의 index값.
 	int l_line = -1; // 지워야 하는 마지막 줄의 index값.
 	int checking; // 현재 행에서 한칸하칸의 index.
-
-	for(int cur=0;cur<W;cur++)
+	
+	
+	// H == 20, W == 10
+	
+	for(int cur=0;cur<H;cur++)
 	{
-		for(checking=0;checking<H && Map[cur][checking] != 0;checking++);
+		for(checking=0;checking<W && Map[cur][checking] != 0;checking++);
 
 		// checking == H 라면 검사했던 라인은 사라져야 하는 라인.
 
-		if(checking == H && f_line == -1) {f_line = cur; l_line = cur; rt_val=true;} 	// f_line이 -1이라면 cur가 지우기 시작줄. l_line도 같이 갱신.
-		else if(checking == H) l_line = cur;				// 현재 라인이 지워야 하는 라인이고 f_line이 -1이 이니라면 l_line갱신.
-		else if(checking != H && f_line != -1)				// f_line이 -1이 아니고 checking 이 H와 값이 다르면 일단 지우기를 진행.
+		if(checking == W && f_line == -1) {f_line = cur; l_line = cur; rt_val=true;} 	// f_line이 -1이라면 cur가 지우기 시작줄. l_line도 같이 갱신.
+		else if(checking == W) l_line = cur;				// 현재 라인이 지워야 하는 라인이고 f_line이 -1이 이니라면 l_line갱신.
+		if( (checking != W && f_line != -1) || (cur == H-1 && f_line != -1))				// f_line이 -1이 아니고 checking 이 H와 값이 다르면 일단 지우기를 진행.
 		{
 			// 지우기 진행.
 			clearLine(f_line,l_line);
@@ -72,6 +75,8 @@ bool checkLine()
 		}
 			
 	}
+	
+	
 	return rt_val;
 }
 
