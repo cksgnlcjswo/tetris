@@ -5,8 +5,18 @@
 
 /* extern으로 정의한 배열 초기화 */
 int Map[H][W] = {0};
+int Score[H][W] = {0};
 
-/* 블록이 주어진 맵을 벗어나는지 체크하는 함수 */
+extern int point; //점수
+
+void scoreGenerate() { //맵에 생성될 점수 생성
+  for(int i = 0 ; i < H ; i++) { 
+    for(int j = 0 ; j < W ; j++) {
+      Score[i][j] = rand() % 38 + 1; //1~100까지 점수 생성.
+    }
+  }
+}
+
 bool boundaryCheck()
 {
 	for(int i = 0;i < 4; i++)
@@ -43,8 +53,7 @@ void downLine(int f_line,int l_line)
 
 bool checkLine()
 {
-	// vector 의 pair를 사용하면 더 간단해 질지도 ... 일단 보류.
-	
+	// vector 의 pair를 사용하면 더 간단해 질지도 ... 일단 보류.	
 	bool rt_val = false;
 	int f_line = -1; // 지워야 하는 첫번째 줄의 index값.
 	int l_line = -1; // 지워야 하는 마지막 줄의 index값.
@@ -65,10 +74,14 @@ bool checkLine()
 		{
 			// 지우기 진행.
 			clearLine(f_line,l_line);
-	
+	                
 			// downLine 진행.
 			downLine(f_line,l_line);
-
+                        
+			for(int row = f_line; row <=l_line; row++) 
+                          for(int col = 0 ; col < W; col++) 
+				point += Score[row][col];
+			
 			// f_line과 l_line -1로 초기화.
 			f_line = -1;
 			l_line = -1;

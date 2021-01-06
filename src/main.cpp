@@ -1,26 +1,37 @@
 /* 테트리스 게임
  * 만든이: 김영우, 김찬휘, 정성구
  *  
- * 이메일:        , rdd0426@gmail.com, cksgnlcjswoo@naver.com, musichead99@naver.com
+ * 이메일: rdd0426@gmail.com, cksgnlcjswoo@naver.com, musichead99@naver.com
  * 
  * */
 
 #include <SFML/Graphics.hpp>
-#include <time.h>
+#include <ctime>
+#include <string>
+#include <iostream>
+#include <sstream>
 #include "map.h"
 #include "block.h"
 
 using namespace sf;
+int point;
 
 int main(void) {
   srand(time(NULL));	
   bool rotate = false;
   clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0, color=1;
+  
 
   RenderWindow window(VideoMode(320,480), "Tetris");
   
-  /*이미지 로드*/
+  /*폰트, 이미지*/
+  Font athena;
+  athena.loadFromFile("../font/Athena.ttf");
+
+  Text sc;
+  sc.setCharacterSize(30);
+  sc.setFont(athena);
 
   Texture t1,t2,t3;
   t1.loadFromFile("../image/tiles.png");
@@ -29,6 +40,8 @@ int main(void) {
 
   Sprite s(t1), background(t2), frame(t3);
   
+  scoreGenerate();
+
   clock_t timer=clock();
   generateBlock(cur);
   curSquareFlag = nextSquareFlag;
@@ -117,8 +130,16 @@ int main(void) {
        window.draw(s);
    }
 
+   std::ostringstream oss; //output string stream
+   oss << point;
+   sc.setString(oss.str());
+   
+   sc.setPosition(140,420); //score 자리수별로 위치 조정해야 할 듯.
+
+   window.draw(sc);
    window.draw(frame);
    window.display();
+
   }
 
 return 0;

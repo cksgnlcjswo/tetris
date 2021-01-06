@@ -8,6 +8,9 @@
 
 /* multiple defination 해결을 위해 수정 */
 extern int Map[H][W];
+extern int Score[H][W];
+
+void scoreGenerate();
 
 bool boundaryCheck(); // boundaryCheck
 
