@@ -4,7 +4,7 @@
 
 TARGET = tetris
 GPP = g++
-OBJ_TETRIS = main.o map.o block.o
+OBJ_TETRIS = main.o map.o block.o menu.o
 
 $(TARGET) : $(OBJ_TETRIS)
 	$(GPP) $(OBJ_TETRIS) -o $(TARGET) -g -lsfml-graphics -lsfml-window -lsfml-system
@@ -17,6 +17,9 @@ map.o : map.cpp
 
 block.o : block.cpp
 	$(GPP) -c block.cpp
+
+menu.o : menu.cpp
+	$(GPP) -c menu.cpp
 
 clean :
 	@echo "cleaning Tetris game...."

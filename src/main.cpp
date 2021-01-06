@@ -12,6 +12,7 @@
 #include <sstream>
 #include "map.h"
 #include "block.h"
+#include "menu.h"
 
 using namespace sf;
 int point;
