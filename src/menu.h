@@ -3,8 +3,10 @@
 
 #ifndef __MENU_H__
 #define __MENU_H__
+#define CHARSIZE 12
 
 
 int mainMenu();
 bool pauseMenu();
+void gameStart();
 #endif
