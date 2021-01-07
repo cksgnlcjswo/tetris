@@ -17,14 +17,13 @@
 using namespace sf;
 int point;
 
+RenderWindow window(VideoMode(320,480), "Tetris");
+
 int main(void) {
   srand(time(NULL));	
   bool rotate = false;
   clock_t delay = 0.05 * CLOCKS_PER_SEC; // 0.5 초
   int dx= 0, color=1;
-  
-
-  RenderWindow window(VideoMode(320,480), "Tetris");
   
   /*폰트, 이미지*/
   Font athena;
@@ -61,7 +60,7 @@ int main(void) {
         if(e.key.code == Keyboard::Up) rotate = true;
 	else if(e.key.code == Keyboard::Left) dx = -1;
 	else if(e.key.code == Keyboard::Right) dx = 1;
-      //else if(e.key.code == Keyboard::Space) pause();
+	else if(e.key.code == Keyboard::Space || e.key.code == Keyboard::Escape) pauseMenu();
      }
    }
 

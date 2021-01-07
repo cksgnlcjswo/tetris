@@ -6,4 +6,5 @@
 
 
 int mainMenu();
+bool pauseMenu();
 #endif
