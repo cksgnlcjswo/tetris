@@ -155,6 +155,84 @@ int mainMenu()
     return -1;
 }
 
+void gameOverMenu() {
+	
+   Texture t;
+   t.loadFromFile("../image/id_input.png");
+   Sprite gameOverMenu(t);
+   gameOverMenu.move(40,135);	
+   //font 설정
+   Font athena;
+   athena.loadFromFile("../font/Athena.ttf");
+   
+   Text word;
+   word.setFont(athena);
+   word.move(65,200);
+   word.setFillColor(Color::Black);
+
+   std::string tmp="";
+   int cursor_pos;
+   Event e;
+
+while(window.isOpen()) {
+      	  
+    while(window.pollEvent(e)) {
+	
+	   if(e.type == Event::Closed) window.close(); // x누르면 윈도우 닫기.   
+
+       if(e.type == Event::KeyPressed) {  
+           if(e.key.code == Keyboard::A) tmp+="a";
+           else if(e.key.code == Keyboard::B) tmp+="b";
+           else if(e.key.code == Keyboard::C) tmp+="c";
+           else if(e.key.code == Keyboard::D) tmp+="d";
+           else if(e.key.code == Keyboard::E) tmp+="e";
+           else if(e.key.code == Keyboard::F) tmp+="f";
+           else if(e.key.code == Keyboard::G) tmp+="g";
+        //   else if(e.key.code == Keyboard::H) tmp+="h"; H를 HEIGHT로 W를 WIDTH로 바꿔야할듯
+           else if(e.key.code == Keyboard::I) tmp+="i";
+           else if(e.key.code == Keyboard::J) tmp+="j";
+           else if(e.key.code == Keyboard::K) tmp+="k";
+           else if(e.key.code == Keyboard::L) tmp+="l";
+           else if(e.key.code == Keyboard::M) tmp+="m";
+           else if(e.key.code == Keyboard::N) tmp+="n";
+           else if(e.key.code == Keyboard::O) tmp+="o";
+           else if(e.key.code == Keyboard::P) tmp+="p";
+           else if(e.key.code == Keyboard::Q) tmp+="q";
+           else if(e.key.code == Keyboard::R) tmp+="r";
+           else if(e.key.code == Keyboard::S) tmp+="s";
+           else if(e.key.code == Keyboard::T) tmp+="t";
+           else if(e.key.code == Keyboard::U) tmp+="u";
+           else if(e.key.code == Keyboard::V) tmp+="v";
+        //   else if(e.key.code == Keyboard::W) tmp+="w";
+           else if(e.key.code == Keyboard::X) tmp+="x";
+           else if(e.key.code == Keyboard::Y) tmp+="y";
+           else if(e.key.code == Keyboard::Z) tmp+="z";
+	       else if(e.key.code == Keyboard::Backspace) tmp.erase(tmp.begin() + tmp.length() - 1); //마지막 단어 삭제
+	       else if(e.key.code == Keyboard::Enter) fileSave();
+	       
+        }
+    }
+     
+   word.setString(tmp);
+
+   window.draw(gameOverMenu);
+   window.draw(word);
+   window.display();
+}
+return;
+}
+
+void fileSave() {
+
+}
+
+bool gameOver() {
+   for(int i=0;i<4;i++) {
+     if(Map[cur[i].y][cur[i].x]) return false; //next 도형좌표에 다른 블록이 있다면 종료
+   }
+return true;
+}
+
 void gameStart()
 {
   srand(time(NULL));	
@@ -237,7 +315,11 @@ void gameStart()
    /*line check함수 */
    checkLine();
 
-   /*게임 종료 체크-> 이거는 main.cpp에 구현*/
+   /*게임 종료 체크*/
+
+   if(!gameOver()) { //게임 종료
+     gameOverMenu();
+   }
 
    delay = 0.05 * CLOCKS_PER_SEC; rotate = false; //delay, rotate 초기화
    /*그리기 */	   

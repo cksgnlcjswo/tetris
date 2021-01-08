@@ -4,9 +4,13 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 #define CHARSIZE 12
-
+#include <string>
+#include <iostream>
 
 int mainMenu();
 bool pauseMenu();
 void gameStart();
+bool gameOver();
+void gameOverMenu();
+void fileSave();
 #endif
