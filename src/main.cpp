@@ -25,7 +25,7 @@ int main(void) {
         gameStart();
         break;
       case 2:
-        // scoreBoard 함수 실행.
+        scoreBoard(); //함수 실행.
         break;
       case 3:
         window.close();

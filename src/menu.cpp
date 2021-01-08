@@ -1,9 +1,12 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "menu.h"
+#include <vector>
+#include <algorithm>
 #include "map.h"
 #include "block.h"
 #include <time.h>
+#include <stdio.h>
 #include <ctime>
 #include <string>
 #include <sstream>
@@ -92,7 +95,6 @@ int mainMenu()
     t_exit.setCharacterSize(CHARSIZE);
     t_cursor.setCharacterSize(CHARSIZE);
 
-
     t_start.setFillColor(Color::White);
     t_score.setFillColor(Color::White);
     t_exit.setFillColor(Color::White);
@@ -142,7 +144,6 @@ int mainMenu()
         t_exit.setPosition(120,420);
         t_cursor.setPosition(110,cursor_pos);
 
-
         window.clear(Color::White);
         window.draw(mainMenu);
         window.draw(t_start);
@@ -171,7 +172,6 @@ void gameOverMenu() {
    word.setFillColor(Color::Black);
 
    std::string tmp="";
-   int cursor_pos;
    Event e;
 
 while(window.isOpen()) {
@@ -188,7 +188,7 @@ while(window.isOpen()) {
            else if(e.key.code == Keyboard::E) tmp+="e";
            else if(e.key.code == Keyboard::F) tmp+="f";
            else if(e.key.code == Keyboard::G) tmp+="g";
-        //   else if(e.key.code == Keyboard::H) tmp+="h"; H를 HEIGHT로 W를 WIDTH로 바꿔야할듯
+        // else if(e.key.code == Keyboard::H) tmp+="h"; H를 HEIGHT로 W를 WIDTH로 바꿔야할듯
            else if(e.key.code == Keyboard::I) tmp+="i";
            else if(e.key.code == Keyboard::J) tmp+="j";
            else if(e.key.code == Keyboard::K) tmp+="k";
@@ -203,12 +203,18 @@ while(window.isOpen()) {
            else if(e.key.code == Keyboard::T) tmp+="t";
            else if(e.key.code == Keyboard::U) tmp+="u";
            else if(e.key.code == Keyboard::V) tmp+="v";
-        //   else if(e.key.code == Keyboard::W) tmp+="w";
+        // else if(e.key.code == Keyboard::W) tmp+="w";
            else if(e.key.code == Keyboard::X) tmp+="x";
            else if(e.key.code == Keyboard::Y) tmp+="y";
            else if(e.key.code == Keyboard::Z) tmp+="z";
 	       else if(e.key.code == Keyboard::Backspace) tmp.erase(tmp.begin() + tmp.length() - 1); //마지막 단어 삭제
-	       else if(e.key.code == Keyboard::Enter) fileSave();
+	       else if(e.key.code == Keyboard::Enter) { //게임종료 조건
+
+           FILE *fp = fopen("../score/score.txt","a"); //text 파일로 읽음
+           fprintf(fp, "%d %s\n",point ,tmp.c_str());
+           fclose(fp);
+           window.close(); 
+           }
 	       
         }
     }
@@ -222,8 +228,77 @@ while(window.isOpen()) {
 return;
 }
 
-void fileSave() {
+void scoreBoard() {
+    using namespace std;
 
+    FILE *fp = fopen("../score/score.txt", "rt" );
+    int rank = 1;
+    char id[10];
+    int p;
+
+    int ranking_xpos = 30, ranking_ypos = 90;
+    int name_xpos = 60, name_ypos = 90;
+    int point_xpos = 250, point_ypos = 90;
+
+    vector<pair<int, string> > v;
+
+    while(1) {
+        int ret = fscanf(fp, "%d %s",&p, id);
+        string str(id);
+        if(ret == EOF) break;
+        v.push_back({p, str});
+    }
+    fclose(fp);
+
+    sort(v.begin(), v.end());
+
+    Texture t;
+    t.loadFromFile("../image/rank.png");
+    Sprite r(t);
+
+    Font athena;
+    athena.loadFromFile("../font/Athena.ttf");
+    
+    Text ranking, name, P;
+    ranking.setFont(athena);
+    name.setFont(athena);
+    ranking.setFillColor(Color::Black);
+    name.setFillColor(Color::Black);
+    P.setFont(athena);
+    P.setFillColor(Color::Black);
+
+    Event e;
+
+      window.clear(Color::White);
+        window.draw(r);
+
+        for(int i = 0 ; i < v.size() ; i++) {
+            ranking.setString(to_string(rank));
+            P.setString(to_string(v[i].first));
+            name.setString(v[i].second);
+            rank++;
+
+            ranking.setPosition(ranking_xpos,ranking_ypos);
+            P.setPosition(point_xpos, point_ypos);
+            name.setPosition(name_xpos, name_ypos);
+
+            window.draw(ranking);
+            window.draw(P);
+            window.draw(name);
+
+            ranking_ypos += 30;
+            point_ypos += 30;
+            name_ypos += 30;
+        }
+        window.display();
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(e))
+        {
+            if(e.type == Event::Closed) window.close(); // x누르면 윈도우 닫기.        
+        }
+    }
 }
 
 bool gameOver() {
