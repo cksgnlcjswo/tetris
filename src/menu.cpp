@@ -181,6 +181,7 @@ void gameStart()
 
   clock_t timer=clock();
   generateBlock(cur);
+  
   curSquareFlag = nextSquareFlag;
   generateBlock(next);
 
@@ -226,7 +227,7 @@ void gameStart()
 	      cur[i].x = next[i].x; 
 	      cur[i].y = next[i].y;
 	      curSquareFlag = nextSquareFlag;   
-	 }	     
+	 }	  
 
 	 generateBlock(next); //next 갱신
       }
@@ -276,8 +277,6 @@ void gameStart()
    window.draw(sc);
    window.draw(frame);
    window.display();
-
   }
-
   return;
 }
