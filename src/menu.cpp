@@ -63,47 +63,51 @@ bool pauseMenu()
 
 int mainMenu()
 {
-    // 배경 설정하는 부분.
+    // Configuring for background image
     Texture t;
     t.loadFromFile("../image/mainMenu.png");
     Sprite mainMenu(t);
     mainMenu.setScale(1.33f, 1.5f);
 
-    //font 설정
+    //font setting
     Font athena;
     athena.loadFromFile("../font/Athena.ttf");
 
-    // text 관련 설정 부분.
+    // text setting
+    // t_start : start button
+    // t_score : score board button
+    // t_exit  : exit game button
+    // t_cursor : text for * shaped cursor
     Text t_start, t_score , t_exit, t_cursor;
 
+    // giving a font to text objects
     t_start.setFont(athena);
-
     t_score.setFont(athena);
     t_exit.setFont(athena);
     t_cursor.setFont(athena);
 
-    
+    // writting the actual texts
     t_start.setString("Game Start");
     t_score.setString("Score Board");
     t_exit.setString("Exit Game");
     t_cursor.setString("*");
 
-
+    // setting the charactersize
     t_start.setCharacterSize(CHARSIZE);
-
     t_score.setCharacterSize(CHARSIZE);
     t_exit.setCharacterSize(CHARSIZE);
     t_cursor.setCharacterSize(CHARSIZE);
 
-    t_start.setFillColor(Color::White);
+    // setting the text color to white
+    t_start.setFil0lColor(Color::White);
     t_score.setFillColor(Color::White);
     t_exit.setFillColor(Color::White);
     t_cursor.setFillColor(Color::Green);
 
-    // Event 설정.
+    // setting event
     Event e; 
 
-    // t_cursor를 위한 위치 설정.
+    // initial position for cursor
     int cursor_pos = 390;
 
     while(window.isOpen())
@@ -114,43 +118,46 @@ int mainMenu()
      
             if(e.type == Event::KeyPressed)
             {
-                if(e.key.code == Keyboard::Up){
-                    if(cursor_pos > 390){
+                if(e.key.code == Keyboard::Up){ // up moving for cursor
+                    if(cursor_pos > 390){ // if the cursor_pos is 390, it's already at the most top  position
                         cursor_pos -= 15;
                     }
                 }
-                else if(e.key.code == Keyboard::Down){
-                    if(cursor_pos < 420){
+                else if(e.key.code == Keyboard::Down){ // down moving for cursor
+                    if(cursor_pos < 420){ // if the cursor_pos is 420 it's already at the most bottom position
                         cursor_pos += 15;
                     }
                 }
-                else if(e.key.code == Keyboard::Enter){
+                else if(e.key.code == Keyboard::Enter){ // selection
                     switch(cursor_pos)
                     {
-                        case 390:
+                        case 390: // 390 is the y position for game start so return 1 to start the game
                             return 1;
-                        case 405:
+                        case 405: // 405 is the y position for score board
                             return 2;
-                        case 420:
+                        case 420: // 420 is the y position for exit game
                             return 3;
                     }
                 }
             }
         }
 
-        // 위치조정.
+        // setting for each options' position
         t_start.setPosition(120,390);
         t_score.setPosition(120,405);
         t_exit.setPosition(120,420);
         t_cursor.setPosition(110,cursor_pos);
 
+        // clear display before draw something on it.
         window.clear(Color::White);
+        // draw the texts
         window.draw(mainMenu);
         window.draw(t_start);
         window.draw(t_score);
         window.draw(t_exit);
         window.draw(t_cursor);
-    
+
+        // display the drawings
         window.display();
     }
     return -1;
@@ -269,28 +276,29 @@ void scoreBoard() {
 
     Event e;
 
-      window.clear(Color::White);
-        window.draw(r);
+    window.clear(Color::White);
+    window.draw(r);
 
-        for(int i = 0 ; i < v.size() ; i++) {
-            ranking.setString(to_string(rank));
-            P.setString(to_string(v[i].first));
-            name.setString(v[i].second);
-            rank++;
+    for(int i = 0 ; i < v.size() ; i++) {
+        ranking.setString(to_string(rank));
+        P.setString(to_string(v[i].first));
+        name.setString(v[i].second);
+        rank++;
 
-            ranking.setPosition(ranking_xpos,ranking_ypos);
-            P.setPosition(point_xpos, point_ypos);
-            name.setPosition(name_xpos, name_ypos);
+        ranking.setPosition(ranking_xpos,ranking_ypos);
+        P.setPosition(point_xpos, point_ypos);
+        name.setPosition(name_xpos, name_ypos);
 
-            window.draw(ranking);
-            window.draw(P);
-            window.draw(name);
+        window.draw(ranking);
+        window.draw(P);
+        window.draw(name);
 
-            ranking_ypos += 30;
-            point_ypos += 30;
-            name_ypos += 30;
-        }
-        window.display();
+        ranking_ypos += 30;
+        point_ypos += 30;
+        name_ypos += 30;
+    }
+
+    window.display();
 
     while(window.isOpen())
     {

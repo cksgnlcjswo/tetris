@@ -18,7 +18,7 @@ RenderWindow window(VideoMode(320,480), "Tetris");
 
 int main(void) {
 
-  while(window.isOpen()) {
+  while(window.isOpen()) { // mainMenu function returns one of three values 1, 2 or 3. 
     switch(mainMenu())
     {
       case 1:
