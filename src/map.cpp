@@ -29,6 +29,7 @@ bool boundaryCheck()
 	}
 	return true;
 }
+
 void clearLine(int f_line,int l_line)
 {
 	for(int i = f_line;i<=l_line;i++)
