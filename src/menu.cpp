@@ -243,9 +243,9 @@ void scoreBoard() {
     char id[10];
     int p;
 
-    int ranking_xpos = 30, ranking_ypos = 90;
-    int name_xpos = 60, name_ypos = 90;
-    int point_xpos = 250, point_ypos = 90;
+    int ranking_xpos = 40, ranking_ypos = 90;
+    int name_xpos = 70, name_ypos = 90;
+    int point_xpos = 230, point_ypos = 90;
 
     vector<pair<int, string> > v;
 
@@ -268,22 +268,32 @@ void scoreBoard() {
     
     Text ranking, name, P;
     ranking.setFont(athena);
-    name.setFont(athena);
     ranking.setFillColor(Color::Black);
+    name.setFont(athena);
     name.setFillColor(Color::Black);
     P.setFont(athena);
     P.setFillColor(Color::Black);
 
     Event e;
+    r.move(10,0);
 
     window.clear(Color::White);
     window.draw(r);
+<<<<<<< HEAD
 
     for(int i = 0 ; i < v.size() ; i++) {
         ranking.setString(to_string(rank));
         P.setString(to_string(v[i].first));
         name.setString(v[i].second);
         rank++;
+=======
+    
+        for(int i = v.size()-1 ; i > -1 ; i--) {
+            ranking.setString(to_string(rank));
+            P.setString(to_string(v[i].first));
+            name.setString(v[i].second);
+            rank++;
+>>>>>>> 4ee54fac3bbf6c283e535256372157c75b1ad446
 
         ranking.setPosition(ranking_xpos,ranking_ypos);
         P.setPosition(point_xpos, point_ypos);
@@ -293,12 +303,21 @@ void scoreBoard() {
         window.draw(P);
         window.draw(name);
 
+<<<<<<< HEAD
         ranking_ypos += 30;
         point_ypos += 30;
         name_ypos += 30;
     }
 
     window.display();
+=======
+            ranking_ypos += 30;
+            point_ypos += 30;
+            name_ypos += 30;
+            if(rank == 2) ranking_xpos -=10;
+        }
+        window.display();
+>>>>>>> 4ee54fac3bbf6c283e535256372157c75b1ad446
 
     while(window.isOpen())
     {
@@ -437,7 +456,13 @@ void gameStart()
    oss << point;
    sc.setString(oss.str());
    
-   sc.setPosition(140,420); //score 자리수별로 위치 조정해야 할 듯.
+   int digitNumber=point,pixel=0; //포인트 자리수 계산
+
+   while(digitNumber) {
+       pixel+=1;
+       digitNumber/=10;
+   }
+   sc.setPosition(150-pixel*5,420); //score 자리수별로 위치 조정해야 할 듯.
 
    window.draw(sc);
    window.draw(frame);
