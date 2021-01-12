@@ -282,12 +282,6 @@ void scoreBoard() {
 
     window.clear(Color::White);
     window.draw(r);
-
-    for(int i = 0 ; i < v.size() ; i++) {
-        ranking.setString(to_string(rank));
-        P.setString(to_string(v[i].first));
-        name.setString(v[i].second);
-        rank++;
     
         for(int i = v.size()-1 ; i > -1 ; i--) {
             ranking.setString(to_string(rank));
@@ -306,7 +300,9 @@ void scoreBoard() {
             ranking_ypos += 30;
             point_ypos += 30;
             name_ypos += 30;
+	    if(rank == 2) ranking_xpos -=10;
         }
+
         window.display();
  
         while(window.isOpen())
@@ -316,8 +312,8 @@ void scoreBoard() {
                 if(e.type == Event::Closed) window.close(); // x누르면 윈도우 닫기.        
             }
         }
-    }
 }
+
 
 bool gameOver(){
    for(int i=0;i<4;i++) {
