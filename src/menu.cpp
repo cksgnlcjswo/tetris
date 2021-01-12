@@ -103,7 +103,7 @@ int mainMenu()
     t_cursor.setCharacterSize(CHARSIZE);
 
     // setting the text color to white
-    t_start.setFil0lColor(Color::White);
+    t_start.setFillColor(Color::White);
     t_score.setFillColor(Color::White);
     t_exit.setFillColor(Color::White);
     t_cursor.setFillColor(Color::Green);
@@ -279,60 +279,47 @@ void scoreBoard() {
     P.setFillColor(Color::Black);
 
     Event e;
-    r.move(10,0);
 
     window.clear(Color::White);
     window.draw(r);
-<<<<<<< HEAD
 
     for(int i = 0 ; i < v.size() ; i++) {
         ranking.setString(to_string(rank));
         P.setString(to_string(v[i].first));
         name.setString(v[i].second);
         rank++;
-=======
     
         for(int i = v.size()-1 ; i > -1 ; i--) {
             ranking.setString(to_string(rank));
             P.setString(to_string(v[i].first));
             name.setString(v[i].second);
             rank++;
->>>>>>> 4ee54fac3bbf6c283e535256372157c75b1ad446
 
-        ranking.setPosition(ranking_xpos,ranking_ypos);
-        P.setPosition(point_xpos, point_ypos);
-        name.setPosition(name_xpos, name_ypos);
+            ranking.setPosition(ranking_xpos,ranking_ypos);
+            P.setPosition(point_xpos, point_ypos);
+            name.setPosition(name_xpos, name_ypos);
 
-        window.draw(ranking);
-        window.draw(P);
-        window.draw(name);
+            window.draw(ranking);
+            window.draw(P);
+            window.draw(name);
 
-<<<<<<< HEAD
-        ranking_ypos += 30;
-        point_ypos += 30;
-        name_ypos += 30;
-    }
-
-    window.display();
-=======
             ranking_ypos += 30;
             point_ypos += 30;
             name_ypos += 30;
-            if(rank == 2) ranking_xpos -=10;
         }
         window.display();
->>>>>>> 4ee54fac3bbf6c283e535256372157c75b1ad446
-
-    while(window.isOpen())
-    {
-        while(window.pollEvent(e))
+ 
+        while(window.isOpen())
         {
-            if(e.type == Event::Closed) window.close(); // x누르면 윈도우 닫기.        
+            while(window.pollEvent(e))
+            {
+                if(e.type == Event::Closed) window.close(); // x누르면 윈도우 닫기.        
+            }
         }
     }
 }
 
-bool gameOver() {
+bool gameOver(){
    for(int i=0;i<4;i++) {
      if(Map[cur[i].y][cur[i].x]) return false; //next 도형좌표에 다른 블록이 있다면 종료
    }
