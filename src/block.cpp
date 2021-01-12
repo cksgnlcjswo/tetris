@@ -61,26 +61,23 @@ bool rotation()
    
    if(curSquareFlag) return true;
 
-   for(int i = 1;i < 5; i++) // %를 이용해서 2,3,4,1번 블록 순서로 회전축을 바꿈
+   /* mod연산을 통해서 회전축을 1,2,3,0 순서로 바꿈 */
+   for(int i = 1;i < 5; i++)
    {
       for(int j = 0;j < 4; j++)
       {
          prev[j].x = cur[j].x;
          prev[j].y = cur[j].y;
-      }
-
-      for(int j = 0;j < 4; j++)
-      {
+  
+	 /* 회전축을 기준으로 y축의 블록이 회전할 때는 -, x축 블록이 회전할 때는 + */
          tmp.x = cur[j].y - cur[i%4].y;
          tmp.y = cur[j].x - cur[i%4].x;
-
-         /* 중심 블록을 기준으로 x축에 있는 블록을 회전시킬 땐 +, y축에 있는 블록을 회전시킬 땐 - */
-
          cur[j].x = cur[i%4].x - tmp.x; 
          cur[j].y = cur[i%4].y + tmp.y;
       }
-
-      if(boundaryCheck()) // boundaryCheck()를 통과하면 prev갱신 후 return
+      
+      /* boundaryCheck()를 통과하면 prev갱신 후 return */
+      if(boundaryCheck())
       {
          for(int j = 0;j < 4; j++)
 	 {
@@ -89,7 +86,8 @@ bool rotation()
          }
       	return true;
       }
-      else // 통과하지 못하면 cur를 복구한 뒤 회전축을 바꿔서 다시 실행
+      /* 통과하지 못했을 경우 prev에서 cur를 복구한 후 회전축을 바꿔서 다시 회전 */
+      else 
       {
          for(int j = 0;j < 4; j++)
 	 {
@@ -98,6 +96,7 @@ bool rotation()
 	 }
       }
    }
-   return false; // 모두 가능하지 않다면 false값 return
+   /* 어떤 회전축을 잡아도 회전이 가능하지 않으면 false return */
+   return false;
 }
 

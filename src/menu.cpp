@@ -39,16 +39,20 @@ bool pauseMenu()
     {
         while(window.pollEvent(e))
         {
+	    /* 키입력 이벤트 처리 */
             if(e.type == Event::Closed) window.close(); 
             if(e.type == Event::KeyPressed)
             {
+		/* menuFlag == true이면 위 버튼, false이면 아래 버튼 */
                 if(e.key.code == Keyboard::Up) menuFlag = true;
                 else if(e.key.code == Keyboard::Down) menuFlag = false;
+		/* space bar나 enter입력 시 현재 버튼에 해당하는 작업 */
                 else if(e.key.code == Keyboard::Space || e.key.code == Keyboard::Enter)
                 {
                     if(menuFlag) return true;
                     else window.close();
                 }
+		/* ESC를 눌렀을 경우에는 바로 pause menu 종료 */
 		else if(e.key.code == Keyboard::Escape) return true;
             }
         }

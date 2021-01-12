@@ -16,11 +16,13 @@ void scoreGenerate() { //맵에 생성될 점수 생성
     }
   }
 }
-
+/* boundaryCheck()함수 */
 bool boundaryCheck()
 {
+
 	for(int i = 0;i < 4; i++)
 	{
+		/* 현재 블럭의 위치가 맵을 벗어났거나 다른 블럭이 있는 위치일 경우 false */
 		if(cur[i].x < 0 || cur[i].y < 0 || cur[i].x >= W || cur[i].y >= H )
 		{
 			return false;
@@ -92,5 +94,3 @@ bool checkLine()
 	
 	return rt_val;
 }
-
-
