@@ -31,7 +31,8 @@ bool boundaryCheck()
 	}
 	return true;
 }
-void clearLine(int f_line,int l_line)
+
+void clearLine(int f_line,int l_line) // clear the map from f_line to l_line
 {
 	for(int i = f_line;i<=l_line;i++)
 	{
@@ -39,9 +40,9 @@ void clearLine(int f_line,int l_line)
 	}
 }
 
-void downLine(int f_line,int l_line)
+void downLine(int f_line,int l_line) // pulling down the lines above the cleared lines.
 {
-	int line_gap = (l_line - f_line) + 1;
+	int line_gap = (l_line - f_line) + 1; // the distance between l_line and f_line
 
 	for(int i= l_line - line_gap ; i >=0 ; i--)
 	{
@@ -55,36 +56,35 @@ void downLine(int f_line,int l_line)
 
 bool checkLine()
 {
-	// vector 의 pair를 사용하면 더 간단해 질지도 ... 일단 보류.	
-	bool rt_val = false;
-	int f_line = -1; // 지워야 하는 첫번째 줄의 index값.
-	int l_line = -1; // 지워야 하는 마지막 줄의 index값.
-	int checking; // 현재 행에서 한칸하칸의 index.
+	bool rt_val = false; // return value. if there's any lines which have to be cleared, rt_val would have true.
+	int f_line = -1; // the first index value which points at the row that has to be cleared.
+	int l_line = -1; // the last index value which points at the row that has to be cleared.
+	int checking; // current index value.
 	
 	
-	// H == 20, W == 10
+	// row : H == 20, column : W == 10
 	
 	for(int cur=0;cur<H;cur++)
 	{
 		for(checking=0;checking<W && Map[cur][checking] != 0;checking++);
 
-		// checking == H 라면 검사했던 라인은 사라져야 하는 라인.
-
-		if(checking == W && f_line == -1) {f_line = cur; l_line = cur; rt_val=true;} 	// f_line이 -1이라면 cur가 지우기 시작줄. l_line도 같이 갱신.
-		else if(checking == W) l_line = cur;				// 현재 라인이 지워야 하는 라인이고 f_line이 -1이 이니라면 l_line갱신.
-		if( (checking != W && f_line != -1) || (cur == H-1 && f_line != -1))				// f_line이 -1이 아니고 checking 이 H와 값이 다르면 일단 지우기를 진행.
+		// If the condition satisfies checking ==  W, current line which the program is checking should be cleared.
+		if(checking == W && f_line == -1) {f_line = cur; l_line = cur; rt_val=true;} 	// If now f_line has -1 value, current line is the first line to be cleared. 
+		else if(checking == W) l_line = cur;											// If the current line needs to be cleared and f_line has not -1 value, update the l_line.
+		if( (checking != W && f_line != -1) || (cur == H-1 && f_line != -1))			// under following two conditions the clearing will have to be done before checkLine function ends. If f_line doesn't have -1 value and current line shouldn't be cleared  OR If f_line is not -1 and the checking prorgress reaches the end of map
 		{
-			// 지우기 진행.
+			// clear the lines which have to be wiped out.
 			clearLine(f_line,l_line);
 	                
-			// downLine 진행.
+			// pulling down the rest of lines above the cleared lines.
 			downLine(f_line,l_line);
-                        
+            
+			// Scoring part.
 			for(int row = f_line; row <=l_line; row++) 
                           for(int col = 0 ; col < W; col++) 
 				point += Score[row][col];
 			
-			// f_line과 l_line -1로 초기화.
+			// initialize f_line and f_line to -1
 			f_line = -1;
 			l_line = -1;
 		}
